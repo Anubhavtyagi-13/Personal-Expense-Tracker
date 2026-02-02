@@ -3,7 +3,14 @@ import ExpenseForm from './components/ExpenseForm';
 import ExpenseList from './components/ExpenseList';
 import './index.css';
 
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:8000';
+// Get API URL from environment variable, with fallback to deployed backend
+const getApiUrl = () => {
+  const url = process.env.REACT_APP_API_URL || 'https://jubilant-courage-production-b9db.up.railway.app';
+  // Remove trailing slash if present
+  return url.replace(/\/$/, '');
+};
+
+const API_BASE_URL = getApiUrl();
 
 function App() {
   const [expenses, setExpenses] = useState([]);

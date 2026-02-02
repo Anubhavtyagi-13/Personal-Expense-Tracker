@@ -75,7 +75,10 @@ cd frontend
 npm install
 ```
 
-3. Create a `.env` file (optional, defaults to localhost:8000):
+3. Create a `.env` file in the `frontend` directory (optional):
 ```bash
-REACT_APP_API_URL=http://localhost:8000
+REACT_APP_API_URL=https://jubilant-courage-production-b9db.up.railway.app
 ```
+   - For local development, use: `REACT_APP_API_URL=http://localhost:8000`
+   - For production, use your deployed backend URL
+   - **Note:** React requires the `REACT_APP_` prefix for environment variables
