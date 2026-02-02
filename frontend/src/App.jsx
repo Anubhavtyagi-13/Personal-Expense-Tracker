@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import ExpenseForm from './components/ExpenseForm';
 import ExpenseList from './components/ExpenseList';
 import './index.css';
@@ -14,7 +14,7 @@ function App() {
   const [sortOrder, setSortOrder] = useState('date_desc');
 
   // Fetch expenses
-  const fetchExpenses = async () => {
+  const fetchExpenses = useCallback(async () => {
     try {
       setLoading(true);
       setError(null);
@@ -37,10 +37,10 @@ function App() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [selectedCategory, sortOrder]);
 
   // Fetch categories
-  const fetchCategories = async () => {
+  const fetchCategories = useCallback(async () => {
     try {
       const response = await fetch(`${API_BASE_URL}/expenses/categories`);
       if (!response.ok) {
@@ -51,12 +51,12 @@ function App() {
     } catch (err) {
       console.error('Error fetching categories:', err);
     }
-  };
+  }, []);
 
   useEffect(() => {
     fetchExpenses();
     fetchCategories();
-  }, [selectedCategory, sortOrder]);
+  }, [fetchExpenses, fetchCategories]);
 
   const handleExpenseAdded = () => {
     fetchExpenses();

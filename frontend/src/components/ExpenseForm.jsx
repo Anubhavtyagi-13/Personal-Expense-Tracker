@@ -65,7 +65,7 @@ function ExpenseForm({ onExpenseAdded, categories, apiUrl }) {
         throw new Error(errorData.detail || 'Failed to create expense');
       }
 
-      const data = await response.json();
+      await response.json();
       setSubmitSuccess(true);
       
       // Reset form
